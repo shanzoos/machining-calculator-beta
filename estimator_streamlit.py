@@ -44,7 +44,7 @@ try:
     from OCC.Core.STEPControl import STEPControl_Reader
     from OCC.Core.IFSelect import IFSelect_RetDone
     from OCC.Core.GProp import GProp_GProps
-    from OCC.Core.BRepGProp import BRepGProp
+    from OCC.Core.BRepGProp import brepgprop
     from OCC.Core.Bnd import Bnd_Box
     from OCC.Core.BRepBndLib import brepbndlib_Add
     from OCC.Core.TopExp import TopExp_Explorer
@@ -300,10 +300,10 @@ def read_step_properties(file_path: str) -> Optional[Tuple[float, float, Tuple[f
             shape = reader.OneShape()
             # Volume & surface area (in file units)
             gprops = GProp_GProps()
-            BRepGProp.VolumeProperties(shape, gprops)
+            brepgprop.VolumeProperties(shape, gprops)
             volume = float(gprops.Mass())
             gprops = GProp_GProps()
-            BRepGProp.SurfaceProperties(shape, gprops)
+            brepgprop.SurfaceProperties(shape, gprops)
             area = float(gprops.Mass())
             # Bounding box (in file units)
             box = Bnd_Box()
@@ -528,7 +528,7 @@ def _detect_planar_pockets_occ(shape, unit_factor_to_mm: float, bbox_mm):
                 if depth_mm < 0.5:
                     exp.Next(); continue
                 gp = GProp_GProps()
-                BRepGProp.SurfaceProperties(face, gp)
+                brepgprop.SurfaceProperties(face, gp)
                 area_mm2 = gp.Mass() * (unit_factor_to_mm ** 2)
                 if area_mm2 < 50.0:
                     exp.Next(); continue
