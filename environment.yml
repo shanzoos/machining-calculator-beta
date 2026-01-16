@@ -1,0 +1,13 @@
+name: pyoccenv
+channels:
+- conda-forge
+dependencies:
+- python=3.10
+- streamlit
+- pythonocc-core
+- plotly
+- pandas
+- openpyxl
+- pip:
+  - cadquery
+  - pip>=23.0

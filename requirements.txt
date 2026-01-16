@@ -1,0 +1,12 @@
+# Core
+streamlit>=1.26
+pandas>=1.5
+
+# Optional (enable 3D toolpath preview)
+plotly>=5.18
+
+# Optional CAD backends for STEP parsing (choose at least one)
+# Preferred OCC backend
+pythonocc-core>=7.7
+# CadQuery fallback
+cadquery>=2.3
